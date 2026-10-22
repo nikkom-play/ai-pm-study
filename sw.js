@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='3f936c4b8ac21a21ba7a';
+const BUILD='ef9fddb8fa884b650add';
 const ROOT=new URL(self.registration.scope),PREFIX='ai-pm-reader-'+encodeURIComponent(ROOT.pathname)+'-',CACHE=PREFIX+BUILD,MAIN=new URL('index.html',ROOT).href;
 const ASSETS=['index.html','manifest.webmanifest','icon.svg'].map(path=>new URL(path,ROOT).href);
 async function validatedPage(response){
