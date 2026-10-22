@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="AI PM"><meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#000000"><meta name="color-scheme" content="light dark">
-<meta name="ai-pm-reader-build" content="3bb8e25a8756f8e7da8f"><title>AI PM · Читалка</title>
+<meta name="ai-pm-reader-build" content="08f072b434d5002f9aaf"><title>AI PM · Читалка</title>
 <style>
 :root{--bg:#f4f2ec;--paper:#fffdf8;--ink:#000;--muted:#626262;--line:#d4d4cf;--red:#e00000;--button:#eeeeea;--font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--gutter:max(16px,env(safe-area-inset-left),env(safe-area-inset-right));--footer-space:130px}
 *{box-sizing:border-box}[hidden]{display:none!important}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--font)}body.dark{color-scheme:dark;--bg:#171f1b;--paper:#202822;--ink:#fff;--muted:#a8ada9;--line:#414741;--red:#ff3030;--button:#252b26}body.oled{color-scheme:dark;--bg:#000;--paper:#000;--ink:#fff;--muted:#929292;--line:#292929;--red:#ff3030;--button:#080808}
@@ -141,7 +141,7 @@ function render(){
   if(whole){$('card').hidden=false;$('card-kind').textContent=g?'Список · пауза':f.kind==='visual'?'Схема · пауза':f.kind==='calculation'?'Расчёт · пауза':'Следующий шаг';$('card-title').textContent=g?g.title:f.kind==='visual'?visuals.get(f.visual).title:f.kind==='calculation'?'Что означают эти числа':f.text;
     const key=l.id+':'+state.frameIndex;if($('card-body').getAttribute('data-key')!==key){$('card-body').setAttribute('data-key',key);$('card-body').replaceChildren();if(f.kind==='calculation'){$('card-body').append(node('p',f.text));const refs=node('div',undefined,'refs');refsInto(refs,blocks.get(f.block).refs);$('card-body').append(refs);}if(state.frameIndex===0&&f.kind==='heading'){const concepts=node('div',undefined,'concepts');for(const c of l.concepts||[]){const p=node('p');p.append(node('strong',c.term+' — '),document.createTextNode(c.meaning));concepts.append(p);}$('card-body').append(concepts);}}
     $('visual').hidden=!g&&f.kind!=='visual';if(g)renderVisual(groupVisual(g));else if(f.kind==='visual')renderVisual(visuals.get(f.visual));$('card-hint').textContent='Прочитай целиком. Нажми «Продолжить», когда разберёшься.';
-  }else{$('word-stage').hidden=false;paintWord(f.text);$('before').textContent=neighbor(-1);$('after').textContent=neighbor(1);}
+  }else{$('word-stage').hidden=false;paintWord(f.text);$('before').textContent=playing?'':neighbor(-1);$('after').textContent=playing?'':neighbor(1);}
   fitWord();
 }
 function pause(redraw=true){playing=false;clearTimeout(timer);timer=null;expectedAt=null;if(redraw)render();save();}
